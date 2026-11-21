@@ -6,6 +6,12 @@ ProofPath is an evidence-driven career transition agent (Product Space Agentic A
 
 ProofPath records evidence. It never certifies that anyone is ready for a job.
 
+## Demo video
+
+[![ProofPath AI demo video](https://i.ytimg.com/vi/cNyYZD85S24/maxresdefault.jpg)](https://youtu.be/cNyYZD85S24)
+
+**[Watch the 2:39 demo on YouTube](https://youtu.be/cNyYZD85S24)**. It shows a live run on `claude-opus-5-5` with fictional sample data: the evidence ledger, an AI-graded assessment, and the coach's roadmap proposal that you approve.
+
 ## Quick start
 
 ```bash
