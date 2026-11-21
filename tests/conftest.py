@@ -49,7 +49,7 @@ def client(tmp_path, monkeypatch, engine):
     monkeypatch.setenv("PROOFPATH_DB", str(tmp_path / "test.db"))
     from app.main import create_app
 
-    with TestClient(create_app()) as c:
+    with TestClient(create_app(), headers={"X-ProofPath-Client": "web"}) as c:
         yield c
 
 

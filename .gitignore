@@ -6,3 +6,5 @@ __pycache__/
 .pytest_cache/
 .remember/
 .DS_Store
+.playwright-mcp/
+.claude/

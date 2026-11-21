@@ -21,6 +21,8 @@ from app.schemas import (
 ROOT = Path(__file__).resolve().parent.parent
 STATIC = ROOT / "static"
 DEMO = ROOT / "demo_data"
+CSRF_HEADER = "X-ProofPath-Client"
+CSRF_VALUE = "web"
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
 log = logging.getLogger("proofpath")
 
@@ -44,6 +46,15 @@ def create_app() -> FastAPI:
     load_env_file(ROOT / ".env")
     db.init_db()
     app = FastAPI(title="ProofPath AI", version="1.0.0")
+
+    @app.middleware("http")
+    async def require_app_header(request: Request, call_next):
+        # CSRF guard: browsers cannot send a custom header cross-site without a CORS preflight,
+        # and no CORS is enabled, so state changes can only come from this app's own frontend.
+        is_write = request.method not in ("GET", "HEAD", "OPTIONS")
+        if is_write and request.url.path.startswith("/api/") and request.headers.get(CSRF_HEADER) != CSRF_VALUE:
+            return error(403, "FORBIDDEN", f"Missing {CSRF_HEADER} header.")
+        return await call_next(request)
 
     @app.exception_handler(LLMUnavailable)
     async def _unavailable(_: Request, exc: LLMUnavailable):

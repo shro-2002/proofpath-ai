@@ -124,7 +124,7 @@ def test_data_and_plan_versions_persist_after_restart(onboarded, tmp_path):
     from app.main import create_app
 
     state = onboarded.get("/api/state").json()
-    with TestClient(create_app()) as fresh:
+    with TestClient(create_app(), headers={"X-ProofPath-Client": "web"}) as fresh:
         again = fresh.get("/api/state").json()
     assert again["ledger"] == state["ledger"]
     assert again["plan"]["version"] == state["plan"]["version"]
@@ -145,3 +145,14 @@ def test_missing_api_key_returns_503(client, sample, monkeypatch):
     set_engine(AnthropicEngine())
     response = client.post("/api/intake", json=sample)
     assert response.status_code == 503 and response.json()["error"]["code"] == "LLM_UNAVAILABLE"
+
+
+def test_state_changes_without_app_header_are_refused(onboarded):
+    from fastapi.testclient import TestClient
+
+    from app.main import create_app
+
+    with TestClient(create_app()) as bare:
+        response = bare.post("/api/reset")
+        assert response.status_code == 403
+        assert bare.get("/api/state").json()["profile"] is not None

@@ -17,7 +17,7 @@ async function api(path, { method = "GET", body } = {}) {
   try {
     response = await fetch(path, {
       method,
-      headers: body ? { "Content-Type": "application/json" } : undefined,
+      headers: { "X-ProofPath-Client": "web", ...(body ? { "Content-Type": "application/json" } : {}) },
       body: body ? JSON.stringify(body) : undefined,
     });
   } catch (err) {
