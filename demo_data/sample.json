@@ -2,6 +2,7 @@
   "label": "Sample data: fictional candidate and fictional companies, written for this demo.",
   "resume_text": "Jordan Avery (fictional sample candidate)\nSenior Operations Analyst, Northwind Logistics (2021-present)\n- Built weekly SQL reports on PostgreSQL covering 40M shipment records for regional operations leads.\n- Designed and maintained Tableau dashboards used by 120 managers to track on-time delivery.\n- Analysed a pricing experiment for express delivery and presented the A/B test results to the VP of Operations.\n- Wrote Python scripts with pandas to clean carrier invoices, cutting manual reconciliation from 2 days to 3 hours.\n- Partnered with finance and warehouse stakeholders to define KPIs and communicate trade-offs in plain language.\n\nOperations Analyst, Brightline Retail (2018-2021)\n- Maintained Excel forecasting models for store staffing across 35 locations.\n- Automated a monthly inventory variance report using SQL and scheduled exports.\n\nEducation\nB.Com, University of Pune, 2018. Completed online courses in statistics and introductory machine learning.\n\nSkills: SQL, Tableau, Excel, Python (pandas), stakeholder communication.",
   "target_role": "Data Scientist",
+  "current_role": "Operations Analyst",
   "hours_per_week": 8,
   "jds": [
     {

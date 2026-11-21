@@ -110,8 +110,8 @@ def run_intake(req: IntakeRequest) -> dict:
 def _persist(conn, req, requirements, mapping, claims, rejected) -> None:
     ts = db.now()
     conn.execute(
-        "INSERT INTO profile (id, resume_text, target_role, hours_per_week, created_at) VALUES (1, ?, ?, ?, ?)",
-        (req.resume_text, req.target_role, req.hours_per_week, ts),
+        "INSERT INTO profile (id, resume_text, target_role, current_role, hours_per_week, created_at) VALUES (1, ?, ?, ?, ?, ?)",
+        (req.resume_text, req.target_role, (req.current_role or "").strip() or None, req.hours_per_week, ts),
     )
     jd_ids = []
     for jd in req.jds:

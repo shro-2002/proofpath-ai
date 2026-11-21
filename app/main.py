@@ -89,7 +89,8 @@ def create_app() -> FastAPI:
 def register_routes(app: FastAPI) -> None:
     @app.get("/")
     def index():
-        return FileResponse(STATIC / "index.html")
+        # no-cache: the page must be revalidated so new ?v= asset URLs reach returning browsers
+        return FileResponse(STATIC / "index.html", headers={"Cache-Control": "no-cache"})
 
     @app.get("/health")
     def health():
@@ -98,7 +99,7 @@ def register_routes(app: FastAPI) -> None:
     @app.get("/api/state")
     def state():
         with db.connect() as conn:
-            profile = db.one(conn, "SELECT target_role, hours_per_week, created_at FROM profile WHERE id = 1")
+            profile = db.one(conn, "SELECT target_role, current_role, hours_per_week, created_at FROM profile WHERE id = 1")
             if not profile:
                 return {"llm": engine_status(), "profile": None}
             active = planner.active_plan(conn)

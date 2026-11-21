@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS profile (
     id INTEGER PRIMARY KEY CHECK (id = 1),
     resume_text TEXT NOT NULL,
     target_role TEXT NOT NULL,
+    current_role TEXT,
     hours_per_week INTEGER NOT NULL,
     created_at TEXT NOT NULL
 );
@@ -169,6 +170,9 @@ def connect():
 def init_db() -> None:
     with connect() as conn:
         conn.executescript(SCHEMA)
+        columns = {r[1] for r in conn.execute("PRAGMA table_info(profile)")}
+        if "current_role" not in columns:  # databases created before the column existed
+            conn.execute("ALTER TABLE profile ADD COLUMN current_role TEXT")
 
 
 def reset_workspace(conn: sqlite3.Connection) -> None:

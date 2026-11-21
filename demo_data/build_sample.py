@@ -111,6 +111,7 @@ SAMPLE = {
     "label": "Sample data: fictional candidate and fictional companies, written for this demo.",
     "resume_text": RESUME,
     "target_role": "Data Scientist",
+    "current_role": "Operations Analyst",
     "hours_per_week": 8,
     "jds": JDS,
 }

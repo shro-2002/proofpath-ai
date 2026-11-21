@@ -97,8 +97,9 @@ class JDInput(BaseModel):
 class IntakeRequest(BaseModel):
     resume_text: str = Field(min_length=200, max_length=20000)
     target_role: str = Field(min_length=2, max_length=120)
+    current_role: str | None = Field(default=None, max_length=120)
     hours_per_week: int = Field(ge=2, le=40)
-    jds: list[JDInput] = Field(min_length=2, max_length=6)
+    jds: list[JDInput] = Field(min_length=1, max_length=6)
 
 
 class StartAssessmentRequest(BaseModel):

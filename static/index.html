@@ -4,35 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ProofPath AI</title>
-  <meta name="description" content="Evidence-driven career transition agent. Stop collecting courses. Start proving you're ready for the job.">
+  <meta name="description" content="Evidence-driven career transition agent. Stop collecting courses. Start proving you're ready.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%279%27 fill=%27%23645BFF%27/%3E%3Crect x=%279%27 y=%279%27 width=%2714%27 height=%2714%27 rx=%274%27 fill=%27none%27 stroke=%27white%27 stroke-width=%273%27/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/app.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/app.css?v=5">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <div class="shell">
+  <div class="shell" id="shell">
     <aside class="sidebar" aria-label="Primary">
-      <div class="brand">
+      <a class="brand" href="#/home">
         <span class="brand-mark" aria-hidden="true"></span>
-        <div>
-          <div class="brand-name">ProofPath</div>
-          <div class="brand-tag">Evidence ledger</div>
-        </div>
-      </div>
-      <nav id="nav" aria-label="Main navigation">
-        <a href="#/overview" data-view="overview">Overview</a>
-        <a href="#/ledger" data-view="ledger">Evidence ledger</a>
-        <a href="#/plan" data-view="plan">Plan <span class="nav-dot" id="nav-proposal" hidden aria-label="Proposal waiting"></span></a>
-        <a href="#/assess" data-view="assess">Assessments</a>
-        <a href="#/projects" data-view="projects">Projects</a>
-        <a href="#/applications" data-view="applications">Applications</a>
-        <a href="#/activity" data-view="activity">Agent activity</a>
-      </nav>
+        <div><div class="brand-name">ProofPath</div><div class="brand-tag">Evidence, not courses</div></div>
+      </a>
+      <nav id="nav" aria-label="Main navigation"></nav>
       <div class="sidebar-foot">
         <div id="engine-pill" class="pill">Checking engine…</div>
-        <button class="link-btn" id="reset-btn" type="button">New intake</button>
+        <button class="link-btn" id="reset-btn" type="button">New profile</button>
       </div>
     </aside>
     <main id="main" tabindex="-1">
@@ -47,8 +37,14 @@
   </aside>
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="/static/ui.js?v=2"></script>
-  <script src="/static/views.js?v=2"></script>
-  <script src="/static/app.js?v=2"></script>
+  <script src="/static/ui.js?v=5"></script>
+  <script src="/static/views-onboarding.js?v=5"></script>
+  <script src="/static/views-home.js?v=5"></script>
+  <script src="/static/views-skills.js?v=5"></script>
+  <script src="/static/views-practice.js?v=5"></script>
+  <script src="/static/views-roadmap.js?v=5"></script>
+  <script src="/static/views-more.js?v=5"></script>
+  <script src="/static/onboarding.js?v=5"></script>
+  <script src="/static/app.js?v=5"></script>
 </body>
 </html>

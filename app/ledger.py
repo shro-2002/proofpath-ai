@@ -46,7 +46,7 @@ def compute_state(claim_count: int, outcomes: list[str], artifact_statuses: list
 
     if artifact_pass:
         level = "artifact_backed"
-        reasons.append("A linked artifact passed review against its acceptance criteria.")
+        reasons.append("A pasted project excerpt passed review against its acceptance criteria. The linked repository itself was not inspected.")
     elif latest == "pass":
         level = "demonstrated"
         reasons.append("Most recent assessment passed the rubric.")

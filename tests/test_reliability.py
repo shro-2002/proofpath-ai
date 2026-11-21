@@ -156,3 +156,18 @@ def test_state_changes_without_app_header_are_refused(onboarded):
         response = bare.post("/api/reset")
         assert response.status_code == 403
         assert bare.get("/api/state").json()["profile"] is not None
+
+
+def test_single_posting_intake_records_current_role(client, sample):
+    sample["jds"] = sample["jds"][:1]
+    sample["current_role"] = "Operations Analyst"
+    assert client.post("/api/intake", json=sample).status_code == 200
+    state = client.get("/api/state").json()
+    assert state["profile"]["current_role"] == "Operations Analyst"
+    assert {r["demand"]["jd_total"] for r in state["ledger"] if r["demand"]["jd_count"]} == {1}
+
+
+def test_index_page_is_revalidated_so_new_assets_load(client):
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.headers["cache-control"] == "no-cache"
