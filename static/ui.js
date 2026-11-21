@@ -54,6 +54,7 @@ const ERROR_TITLES = {
   ALREADY_ANSWERED: "Already answered",
   STALE_PROPOSAL: "Proposal is out of date",
   NOT_FOUND: "Not found",
+  FORBIDDEN: "Request blocked. Reload the page.",
 };
 
 function showError(err) {
