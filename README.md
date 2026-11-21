@@ -32,6 +32,21 @@ Without an API key every AI step returns a clear `503 LLM_UNAVAILABLE` error. It
 PROOFPATH_LLM=offline PROOFPATH_DB=data/offline.db .venv/bin/uvicorn app.main:app --port 8011
 ```
 
+## Screenshots
+
+Live run on `claude-opus-5-5` with the sample data, desktop 1440×900, in [`screenshots/`](screenshots/):
+
+| | |
+|---|---|
+| Intake | `01-intake.png`, `02-intake-progress.png` |
+| Overview and ledger | `03-overview.png`, `04-evidence-ledger.png`, `05-skill-evidence-drawer.png` |
+| Assessment loop | `06-assessment-question.png`, `07-assessment-result.png` (6/8 pass) |
+| Plan change | `08-plan-proposal-diff.png`, `09-plan-accepted-v2.png` |
+| Adversarial check | `10-injection-attempt-blocked.png` (0/8, flagged) |
+| Projects | `11-portfolio-projects.png`, `12-artifact-reviewed.png` |
+| Applications | `13-applications.png` (cautious feedback: 2 outcomes, needs 8) |
+| Transparency | `14-agent-activity.png`, `15-overview-after-progress.png`, `16-skill-evidence-timeline.png` |
+
 ## How it works
 
 ```
