@@ -1,0 +1,32 @@
+{
+  "label": "Sample data: fictional candidate and fictional companies, written for this demo.",
+  "resume_text": "Jordan Avery (fictional sample candidate)\nSenior Operations Analyst, Northwind Logistics (2021-present)\n- Built weekly SQL reports on PostgreSQL covering 40M shipment records for regional operations leads.\n- Designed and maintained Tableau dashboards used by 120 managers to track on-time delivery.\n- Analysed a pricing experiment for express delivery and presented the A/B test results to the VP of Operations.\n- Wrote Python scripts with pandas to clean carrier invoices, cutting manual reconciliation from 2 days to 3 hours.\n- Partnered with finance and warehouse stakeholders to define KPIs and communicate trade-offs in plain language.\n\nOperations Analyst, Brightline Retail (2018-2021)\n- Maintained Excel forecasting models for store staffing across 35 locations.\n- Automated a monthly inventory variance report using SQL and scheduled exports.\n\nEducation\nB.Com, University of Pune, 2018. Completed online courses in statistics and introductory machine learning.\n\nSkills: SQL, Tableau, Excel, Python (pandas), stakeholder communication.",
+  "target_role": "Data Scientist",
+  "hours_per_week": 8,
+  "jds": [
+    {
+      "title": "Data Scientist, Pricing",
+      "company": "Fabrikam Travel (fictional)",
+      "role_family": "Data Scientist",
+      "text": "We are hiring a Data Scientist to improve dynamic pricing across our booking flows.\n\nWhat you will do:\n- Design and analyse A/B tests that measure the revenue impact of pricing changes.\n- Build and validate machine learning models for demand forecasting.\n- Translate analysis into clear recommendations for product and commercial stakeholders.\n\nRequirements:\n- Strong SQL skills and experience working with large datasets.\n- Proficiency in Python, including pandas and scikit-learn.\n- Solid grounding in statistics, including hypothesis testing and confidence intervals.\n- Experience communicating results to non-technical stakeholders.\n\nNice to have:\n- Experience with causal inference methods.\n- Familiarity with Git and code review workflows."
+    },
+    {
+      "title": "Data Scientist, Customer Growth",
+      "company": "Contoso Health (fictional)",
+      "role_family": "Data Scientist",
+      "text": "Contoso Health is looking for a Data Scientist to join the growth team.\n\nResponsibilities:\n- Own experimentation for onboarding, from A/B test design through to readouts.\n- Build churn prediction models using machine learning and evaluate them on held-out data.\n- Perform feature engineering on product usage and claims data.\n\nYou should have:\n- 2+ years of experience using Python for data analysis and modelling.\n- Advanced SQL and comfort with messy, real-world data.\n- Applied statistics knowledge such as regression, power analysis and sampling.\n- Ability to explain model behaviour and limitations to stakeholders.\n\nPreferred:\n- Experience with Tableau or Looker for self-serve reporting.\n- Exposure to cloud platforms such as AWS or GCP."
+    },
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Tailspin Mobility (fictional)",
+      "role_family": "ML Engineer",
+      "text": "Tailspin Mobility is building real-time ETA prediction for 2 million daily trips.\n\nIn this role you will:\n- Train, evaluate and ship machine learning models to production.\n- Own model deployment and serving behind low-latency APIs.\n- Set up monitoring for data drift and model performance (MLOps).\n\nMust have:\n- Strong Python engineering skills and experience with Git.\n- Hands-on machine learning experience with scikit-learn or PyTorch.\n- Experience packaging services with Docker.\n- Experience deploying workloads on a cloud platform such as AWS or GCP.\n\nBonus:\n- Experience with Spark for large-scale feature pipelines.\n- Experience with Airflow or similar orchestration tools."
+    },
+    {
+      "title": "Analytics Engineer",
+      "company": "Litware Payments (fictional)",
+      "role_family": "Analytics Engineer",
+      "text": "Litware Payments needs an Analytics Engineer to own the transformation layer of our warehouse.\n\nYou will:\n- Build and test dbt models that turn raw payment events into trusted tables.\n- Design dimensional data models for finance and risk reporting.\n- Partner with analysts and stakeholders to define metrics and documentation.\n\nRequirements:\n- Expert SQL, including window functions and query performance tuning.\n- Experience with dbt in production.\n- Strong data modeling fundamentals (star schemas, slowly changing dimensions).\n- Working knowledge of Git and pull-request based workflows.\n\nNice to have:\n- Python for data tooling.\n- Experience with Airflow for scheduling."
+    }
+  ]
+}
