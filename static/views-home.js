@@ -56,7 +56,13 @@ function gapsCard(ledger) {
 }
 
 /* Only logged agent runs appear here. No run, no insight. */
-const DECISION_TEXT = { proposed: "waiting for your approval", rejected: "you declined it", active: "you accepted it", superseded: "you accepted it" };
+const DECISION_TEXT = {
+  proposed: "waiting for your approval",
+  rejected: "you declined it",
+  active: "you accepted it",
+  superseded: "you accepted it",
+  replaced: "replaced by a newer update before you decided",
+};
 
 function coachCard(activity, proposal, versionStatus) {
   const summaries = activity.filter((e) => e.action === "summary").slice(0, 3);
@@ -89,7 +95,7 @@ function milestoneCard(plan) {
 }
 
 Views.home = (s, activity, assessments, versions) => {
-  const versionStatus = Object.fromEntries(versions.map((v) => [v.version, v.status]));
+  const versionStatus = Object.fromEntries(versions.map((v) => [v.version, decisionState(v)]));
   const from = s.profile.current_role ? `From ${esc(s.profile.current_role)} · ` : "";
   return `<div class="view-enter">
     ${proposalCallout(s.proposal)}

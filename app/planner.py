@@ -162,7 +162,8 @@ def create_initial_plan(conn, plan: dict) -> int:
 
 def store_proposal(conn, plan: dict, diff: dict, reason: str, cited: list[int], trigger: str) -> dict:
     base = active_plan(conn)
-    conn.execute("UPDATE plan_versions SET status = 'superseded', decided_at = ? WHERE status = 'proposed'", (db.now(),))
+    # A pending proposal displaced by a newer one was never decided by the user, so decided_at stays NULL.
+    conn.execute("UPDATE plan_versions SET status = 'superseded' WHERE status = 'proposed'")
     version = _next_version(conn)
     conn.execute(
         """INSERT INTO plan_versions (version, base_version, status, plan, diff, reason, cited_events, trigger, created_at)

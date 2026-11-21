@@ -268,6 +268,12 @@ function nextPlanStep(state) {
   return { item, row: item ? rowOf(item) : null, covered };
 }
 
+/* What the user decided about a plan version. "superseded" alone is ambiguous: an accepted plan that
+   was later replaced has a decision time; a proposal displaced by a newer one was never decided. */
+function decisionState(version) {
+  return version.status === "superseded" && !version.decided_at ? "replaced" : version.status;
+}
+
 /* Assessments can move a claim; projects are the route for gaps and for demonstrated skills. */
 function canAssessRow(row) {
   return Boolean(row) && (["claimed", "partial"].includes(row.level) || row.contested);

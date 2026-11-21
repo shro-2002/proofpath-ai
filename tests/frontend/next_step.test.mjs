@@ -8,7 +8,7 @@ import vm from "node:vm";
 const source = readFileSync(new URL("../../static/ui.js", import.meta.url), "utf8");
 const sandbox = {};
 vm.createContext(sandbox);
-vm.runInContext(`${source}\nthis.nextPlanStep = nextPlanStep; this.isStepCovered = isStepCovered; this.canAssessRow = canAssessRow;`, sandbox);
+vm.runInContext(`${source}\nthis.nextPlanStep = nextPlanStep; this.isStepCovered = isStepCovered; this.canAssessRow = canAssessRow; this.decisionState = decisionState;`, sandbox);
 
 const row = (skill_id, level, contested = false) => ({ skill_id, name: skill_id, level, contested });
 const item = (skill_id, action) => ({ skill_id, skill: skill_id, action, hours: 4, detail: "", why: { level: "none", demand: "" } });
@@ -39,6 +39,13 @@ test("only claims, partials and contested skills offer an assessment CTA", () =>
   assert.equal(sandbox.canAssessRow(row("a", "claimed")), true);
   assert.equal(sandbox.canAssessRow(row("a", "none")), false);
   assert.equal(sandbox.canAssessRow(row("a", "demonstrated")), false);
+});
+
+test("a proposal replaced before any decision is never reported as accepted", () => {
+  assert.equal(sandbox.decisionState({ status: "superseded", decided_at: null }), "replaced");
+  assert.equal(sandbox.decisionState({ status: "superseded", decided_at: "2026-11-21T14:00:00+00:00" }), "superseded");
+  assert.equal(sandbox.decisionState({ status: "rejected", decided_at: "2026-11-21T14:00:00+00:00" }), "rejected");
+  assert.equal(sandbox.decisionState({ status: "proposed", decided_at: null }), "proposed");
 });
 
 test("an empty or fully covered plan yields no next step", () => {

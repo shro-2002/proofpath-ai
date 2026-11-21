@@ -103,7 +103,7 @@ Uncertainty is tracked separately: unknown, self-reported, single check, consist
 
 ## Reliability guarantees, all tested
 
-`.venv/bin/python -m pytest -q` runs 32 backend tests (unit, HTTP-level, and Claude request-shape tests against a mock transport) with a scripted fake LLM. `node --test tests/frontend` runs 5 tests on the shared next-step logic the UI uses on every page. The backend tests cover:
+`.venv/bin/python -m pytest -q` runs 33 backend tests (unit, HTTP-level, and Claude request-shape tests against a mock transport) with a scripted fake LLM. `node --test tests/frontend` runs 6 tests on the shared next-step and decision-state logic the UI uses on every page. The backend tests cover:
 
 | Guarantee | Test |
 |---|---|
@@ -119,6 +119,7 @@ Uncertainty is tracked separately: unknown, self-reported, single check, consist
 | LLM failures surface honestly and preserve the workspace | `test_llm_failure_surfaces_and_preserves_workspace`, `test_missing_api_key_returns_503` |
 | Agent cannot propose without a real diff, or claim readiness | `test_agent_cannot_propose_without_a_plan_change`, `test_agent_reason_cannot_claim_job_readiness` |
 | Full loop: pass → proposal citing the event → accept → new version | `test_assessment_pass_produces_justified_proposal_and_new_version` |
+| A proposal replaced by a newer one is never recorded as your decision | `test_proposal_replaced_by_a_newer_one_is_not_recorded_as_decided` |
 | Claude calls send structured-output schema, effort, refusal fallback, strict tools; refusals raise | `tests/test_anthropic_engine.py` |
 
 ## Configuration

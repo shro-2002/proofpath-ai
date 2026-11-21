@@ -43,6 +43,27 @@ def test_assessment_pass_produces_justified_proposal_and_new_version(onboarded, 
     assert onboarded.get("/api/skills/ab-testing").json()["level"] == "demonstrated"
 
 
+def test_proposal_replaced_by_a_newer_one_is_not_recorded_as_decided(onboarded, engine):
+    engine.overrides[GradeResult] = _grade_from_answer
+
+    def pass_assessment(skill_id):
+        aid = onboarded.post("/api/assessments", json={"skill_id": skill_id}).json()["id"]
+        return onboarded.post(f"/api/assessments/{aid}/answer", json={"answer": GOOD_ANSWER}).json()["proposal"]
+
+    first = pass_assessment("ab-testing")
+    second = pass_assessment("sql")
+    accepted = onboarded.post(f"/api/plan/proposals/{second['id']}/accept").json()
+    third = pass_assessment("python")
+    onboarded.post(f"/api/plan/proposals/{third['id']}/accept")
+
+    versions = {v["version"]: v for v in onboarded.get("/api/plan").json()["versions"]}
+    replaced_undecided = versions[first["version"]]
+    accepted_then_replaced = versions[accepted["version"]]
+    assert replaced_undecided["status"] == accepted_then_replaced["status"] == "superseded"
+    assert replaced_undecided["decided_at"] is None  # the user never accepted or declined it
+    assert accepted_then_replaced["decided_at"] is not None
+
+
 def test_agent_cannot_propose_without_a_plan_change(onboarded, engine):
     attempts = []
 

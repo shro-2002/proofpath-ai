@@ -149,8 +149,13 @@ function proposalDecision(r, versionStatus) {
   const v = made.detail.result.proposal_version;
   const status = versionStatus[v];
   if (status === "proposed") return `<div class="run-step wait"><span class="icon-wrap">${icon("clock")}</span><div class="small"><strong>Update v${v} is waiting for your approval.</strong> <a href="#/roadmap">Review it</a></div></div>`;
-  const text = { rejected: `You declined update v${v}. The roadmap stayed as it was.`, active: `You accepted update v${v}.`, superseded: `You accepted update v${v}; a later version has since replaced it.` }[status];
-  return text ? `<div class="run-step"><span class="icon-wrap">${icon(status === "rejected" ? "x" : "check")}</span><div class="small"><strong>Decision:</strong> ${esc(text)}</div></div>` : "";
+  const outcome = {
+    rejected: { label: "Decision:", text: `You declined update v${v}. The roadmap stayed as it was.`, ic: "x" },
+    active: { label: "Decision:", text: `You accepted update v${v}.`, ic: "check" },
+    superseded: { label: "Decision:", text: `You accepted update v${v}; a later version has since replaced it.`, ic: "check" },
+    replaced: { label: "No decision:", text: `A newer update replaced v${v} before you accepted or declined it. The roadmap stayed as it was.`, ic: "refresh" },
+  }[status];
+  return outcome ? `<div class="run-step"><span class="icon-wrap">${icon(outcome.ic)}</span><div class="small"><strong>${outcome.label}</strong> ${esc(outcome.text)}</div></div>` : "";
 }
 
 function runCard(r, dev, versionStatus) {
@@ -170,7 +175,7 @@ function runCard(r, dev, versionStatus) {
 
 Views.activity = (entries, dev, versions) => {
   const runs = groupRuns(entries);
-  const versionStatus = Object.fromEntries(versions.map((v) => [v.version, v.status]));
+  const versionStatus = Object.fromEntries(versions.map((v) => [v.version, decisionState(v)]));
   return `<div class="view-enter">
     <div class="page-head"><div><div class="eyebrow">AI coach log</div><h1>What your coach did, and why</h1>
       <p>The coach acts only through tools that code validates. Refused calls are shown with their reason. Switch to the developer view for raw inputs, outputs and IDs.</p></div>
